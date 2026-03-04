@@ -7,12 +7,18 @@ export class Mithril {
   private readonly apiKey: string;
   private readonly baseUrl: string;
 
-  constructor(config: MithrilConfig) {
-    if (!config.apiKey) {
-      throw new Error("apiKey is required");
+  constructor(config: MithrilConfig = {}) {
+    const key =
+      config.apiKey ||
+      (typeof process !== "undefined" ? process.env?.MITHRIL_API_KEY : undefined) ||
+      "";
+    if (!key) {
+      throw new Error(
+        "apiKey is required. Pass it directly or set the MITHRIL_API_KEY environment variable."
+      );
     }
-    this.apiKey = config.apiKey;
-    this.baseUrl = (config.baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "");
+    this.apiKey = key;
+    this.baseUrl = DEFAULT_BASE_URL;
   }
 
   /**

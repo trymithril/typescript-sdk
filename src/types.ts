@@ -1,8 +1,6 @@
 export interface MithrilConfig {
-  /** Your Mithril agent API key. */
-  apiKey: string;
-  /** API base URL. Defaults to https://api.trymithril.com */
-  baseUrl?: string;
+  /** Your Mithril agent API key. Falls back to MITHRIL_API_KEY env var. */
+  apiKey?: string;
 }
 
 export interface PayOptions {

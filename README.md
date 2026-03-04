@@ -13,7 +13,7 @@ npm install @trymithril/sdk
 ```typescript
 import { Mithril } from "@trymithril/sdk";
 
-const mithril = new Mithril({ apiKey: process.env.MITHRIL_API_KEY });
+const mithril = new Mithril(); // reads MITHRIL_API_KEY from env
 
 const result = await mithril.pay("https://api.example.com/data");
 
@@ -58,6 +58,18 @@ const result = await mithril.pay("https://api.example.com/query", {
     creditUsed: "0.02",     // Paid from your credit line
   }
 }
+```
+
+### Environment variables
+
+Instead of passing `apiKey` directly, set environment variables:
+
+```bash
+export MITHRIL_API_KEY=your-api-key
+```
+
+```typescript
+const mithril = new Mithril(); // auto-reads from env
 ```
 
 ### Error handling
