@@ -35,7 +35,9 @@ export class Mithril {
       payload.headers = options.headers;
     }
     if (options?.body) {
-      payload.body = btoa(options.body);
+      const bytes = new TextEncoder().encode(options.body);
+      const binary = Array.from(bytes, (b) => String.fromCharCode(b)).join("");
+      payload.body = btoa(binary);
     }
 
     const raw = await this.post("/v1/agent/purchase", payload);
@@ -47,7 +49,9 @@ export class Mithril {
       const bodyB64: string = raw.response.body || "";
       let decoded: string;
       try {
-        decoded = atob(bodyB64);
+        const binaryStr = atob(bodyB64);
+        const bytes = Uint8Array.from(binaryStr, (c) => c.charCodeAt(0));
+        decoded = new TextDecoder().decode(bytes);
       } catch {
         decoded = bodyB64;
       }

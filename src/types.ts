@@ -7,7 +7,7 @@ export interface MithrilConfig {
 
 export interface PayOptions {
   /** HTTP method for the target URL. Defaults to GET. */
-  method?: "GET" | "POST" | "PUT";
+  method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   /** Headers to forward to the target URL. */
   headers?: Record<string, string>;
   /** Request body string for POST/PUT requests. */
