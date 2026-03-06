@@ -1,6 +1,6 @@
 {
   "name": "@trymithril/sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Mithril SDK — credit-backed payments for AI agents",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -25,7 +25,16 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "publish:dry": "npm run build && npm publish --access public --dry-run",
+    "publish:npm": "npm publish --access public",
+    "release": "node scripts/release.mjs",
+    "release:patch": "node scripts/release.mjs patch",
+    "release:minor": "node scripts/release.mjs minor",
+    "release:major": "node scripts/release.mjs major"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "mithril",
