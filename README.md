@@ -13,7 +13,7 @@ npm install @trymithril/sdk
 ```typescript
 import { Mithril } from "@trymithril/sdk";
 
-const mithril = new Mithril(); // reads MITHRIL_API_KEY from env
+const mithril = new Mithril(); // uses MITHRIL_API_KEY from env, or pass { apiKey: "..." }
 
 const result = await mithril.pay("https://api.example.com/data");
 
@@ -30,7 +30,7 @@ console.log(result.payment.txHash); // "0xabc..."
 const result = await mithril.pay("https://api.example.com/data");
 ```
 
-### POST with body
+### POST (or PUT, PATCH, DELETE) with body
 
 ```typescript
 const result = await mithril.pay("https://api.example.com/query", {
@@ -60,17 +60,25 @@ const result = await mithril.pay("https://api.example.com/query", {
 }
 ```
 
-### Environment variables
+### API key (env or constructor)
 
-Instead of passing `apiKey` directly, set environment variables:
+The client needs an API key. Either set the environment variable:
 
 ```bash
 export MITHRIL_API_KEY=your-api-key
 ```
 
 ```typescript
-const mithril = new Mithril(); // auto-reads from env
+const mithril = new Mithril(); // reads from env
 ```
+
+Or pass it in the constructor:
+
+```typescript
+const mithril = new Mithril({ apiKey: "your-api-key" });
+```
+
+If neither is set, the constructor throws.
 
 ### Error handling
 
@@ -92,7 +100,7 @@ try {
 
 1. Sign up at [app.trymithril.com](https://app.trymithril.com/sign-up)
 2. Create an agent and generate an API key
-3. Pass the key to the SDK
+3. Pass the key to the SDK (env `MITHRIL_API_KEY` or `new Mithril({ apiKey: "..." })`)
 
 ## Requirements
 
